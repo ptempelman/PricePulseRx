@@ -1,38 +1,32 @@
 [
-    [
-        [
-            [
-                {
-                    "drug": "Generic Lipitor",
-                    "lowest_price": "3.83",
-                    "highest_price": "21.25",
-                    "timestamp": 1713140358.935513
-                },
-                {
-                    "drug": "Lisinopril",
-                    "lowest_price": "0.04",
-                    "highest_price": "13.78",
-                    "timestamp": 1713140518.611115
-                },
-                {
-                    "drug": "Albuterol",
-                    "lowest_price": "8.46",
-                    "highest_price": "35.31",
-                    "timestamp": 1713140810.067029
-                },
-                {
-                    "drug": "Amlodipine",
-                    "lowest_price": "0.51",
-                    "highest_price": "16.72",
-                    "timestamp": 1713141496.2360342
-                },
-                {
-                    "drug": "Synthroid",
-                    "lowest_price": "135.84",
-                    "highest_price": "165.03",
-                    "timestamp": 1713143857.4728372
-                }
-            ]
-        ]
-    ]
+    {
+        "drug": "Generic Lipitor",
+        "lowest_price": "3.83",
+        "highest_price": "21.25",
+        "timestamp": 1713140358.935513
+    },
+    {
+        "drug": "Lisinopril",
+        "lowest_price": "0.04",
+        "highest_price": "13.78",
+        "timestamp": 1713140518.611115
+    },
+    {
+        "drug": "Albuterol",
+        "lowest_price": "8.46",
+        "highest_price": "35.31",
+        "timestamp": 1713140810.067029
+    },
+    {
+        "drug": "Amlodipine",
+        "lowest_price": "0.51",
+        "highest_price": "16.72",
+        "timestamp": 1713141496.2360342
+    },
+    {
+        "drug": "Synthroid",
+        "lowest_price": "135.84",
+        "highest_price": "165.03",
+        "timestamp": 1713143857.4728372
+    }
 ]
