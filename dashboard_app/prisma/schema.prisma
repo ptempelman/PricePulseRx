@@ -18,3 +18,14 @@ model Post {
 
     @@index([name])
 }
+
+model Price {
+    id        Int      @id @default(autoincrement())
+    drugName  String
+    platform  String
+    price     Float
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@index([drugName])
+}
