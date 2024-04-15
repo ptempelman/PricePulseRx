@@ -12,11 +12,13 @@ async def read_root():
 
 @app.post("/get_price")
 async def get_price(request: Request):
+    # Request will have information: platform and drug_name
     pass
 
 
 @app.post("/predict_price")
 async def predict(request: Request):
+    # Request will have information: platform and drug_name
     pass
 
 
