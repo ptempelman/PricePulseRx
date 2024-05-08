@@ -1,6 +1,13 @@
 import Head from "next/head";
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 export default function Search() {
+
+    const router = useRouter();
+    const drugName = router.query.drugPage;
+    console.log(drugName)
+
     return (
         <>
             <Head>
@@ -12,7 +19,7 @@ export default function Search() {
 
                 <div className="flex flex-col mb-20 justify-around pr-10">
                     <div className="flex gap-80 items-end">
-                        <div className="text-white text-3xl max-w-64 flex-grow"> Searched Drug </div>
+                        <div className="text-white text-3xl max-w-64 flex-grow"> {drugName} </div>
                         <div className="flex gap-3 flex-grow items-center text-lg text-white gap-14">
                             <div> Time Frame: </div>
                             <button> 1D </button>
