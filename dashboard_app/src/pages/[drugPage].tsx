@@ -1,12 +1,84 @@
 import Head from "next/head";
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react'; // Import useRef
+import placeholderData from '../../placeholder_data.json';
+import Chart from 'chart.js/auto';
 
 export default function Search() {
 
     const router = useRouter();
-    const drugName = router.query.drugPage;
-    console.log(drugName)
+    const drugName = router.query.drugPage
+    const [jsonData, setJsonData] = useState(placeholderData);
+
+    const histData = placeholderData.Lisinopril.historicPrices
+    const dates = histData.map(data => data.date);
+    const prices = histData.map(data => data.price);
+
+    const chartRef = useRef<HTMLCanvasElement>(null); // Ref for chart canvas
+    const chartInstance = useRef<Chart>(); // Ref for chart instance
+
+    useEffect(() => {
+        if (chartRef.current) {
+            const ctx = chartRef.current.getContext('2d');
+            if (ctx) {
+                if (chartInstance.current) {
+                    chartInstance.current.destroy();
+                }
+                chartInstance.current = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: dates,
+                        datasets: [{
+                            label: 'Price',
+                            data: prices,
+                            borderColor: 'white',
+                            backgroundColor: 'rgba(0, 0, 0, 0)',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                display: true,
+                                title: {
+                                    display: true,
+                                    text: 'Date',
+                                    color: 'black' // Set x-axis title color to black
+                                },
+                                grid: {
+                                    color: 'black' // Set x-axis grid lines color to black
+                                },
+                                ticks: {
+                                    color: 'black' // Set x-axis ticks color to black
+                                }
+                            },
+                            y: {
+                                display: true,
+                                title: {
+                                    display: true,
+                                    text: 'Price',
+                                    color: 'black' // Set y-axis title color to black
+                                },
+                                grid: {
+                                    color: 'black' // Set y-axis grid lines color to black
+                                },
+                                ticks: {
+                                    color: 'black' // Set y-axis ticks color to black
+                                }
+                            }
+                        },
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Price vs. Date',
+                                color: 'black' // Set chart title color to black
+                            }
+                        }
+                    }
+                });
+            }
+        }
+    }, [dates, prices]);
 
     return (
         <>
@@ -50,7 +122,9 @@ export default function Search() {
 
                     <div className="flex flex-col gap-5 flex-grow justify-center">
                         <div className="flex flex-grow gap-5 justify-center pr-10">
-                            <div className="bg-[#D0A509] text-center flex-grow flex justify-center items-center"> Placeholder </div>
+                            <div className="bg-[#D0A509] text-center flex flex-grow justify-center items-center">
+                                <canvas id="myChart" ref={chartRef} style={{ width: '100%', maxWidth: '600px' }}></canvas> {/* Added ref */}
+                            </div>
                             <div className="bg-[#F8CF24] text-center flex-grow flex justify-center items-center"> Placeholder </div>
                         </div>
                         <div className="flex flex-grow gap-5 justify-center pr-10">
@@ -60,7 +134,7 @@ export default function Search() {
                     </div>
                 </div>
 
-            </main >
+            </main>
         </>
     );
 }
