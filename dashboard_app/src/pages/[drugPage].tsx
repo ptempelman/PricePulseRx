@@ -1,8 +1,9 @@
+import Chart from 'chart.js/auto';
 import Head from "next/head";
 import { useRouter } from 'next/router';
-import { useEffect, useState, useRef } from 'react'; // Import useRef
+import { useEffect, useRef, useState } from 'react'; // Import useRef
+import { api } from "~/utils/api";
 import placeholderData from '../../placeholder_data.json';
-import Chart from 'chart.js/auto';
 
 export default function Search() {
 
@@ -11,8 +12,22 @@ export default function Search() {
     const [jsonData, setJsonData] = useState(placeholderData);
 
     const histData = placeholderData.Lisinopril.historicPrices
-    const dates = histData.map(data => data.date);
-    const prices = histData.map(data => data.price);
+
+    const [prices, setPrices] = useState<number[]>([]);
+    const [dates, setDates] = useState<string[]>([]);
+
+    const { data, error, isLoading } = api.price.getPricesForDrug.useQuery({ drugName: drugName as string ?? '' });
+
+    console.log(prices);
+
+    useEffect(() => {
+        if (data) {
+            data.forEach(({ price, createdAt }) => {
+                setPrices(prev => [...prev, price]);
+                setDates(prev => [...prev, new Date(createdAt).toISOString()]);
+            });
+        }
+    }, [data]);
 
     const chartRef = useRef<HTMLCanvasElement>(null); // Ref for chart canvas
     const chartInstance = useRef<Chart>(); // Ref for chart instance
@@ -80,6 +95,10 @@ export default function Search() {
         }
     }, [dates, prices]);
 
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <>
             <Head>
@@ -123,7 +142,7 @@ export default function Search() {
                     <div className="flex flex-col gap-5 flex-grow justify-center">
                         <div className="flex flex-grow gap-5 justify-center pr-10">
                             <div className="bg-[#D0A509] text-center flex flex-grow justify-center items-center">
-                                <canvas id="myChart" ref={chartRef} style={{ width: '100%', maxWidth: '600px' }}></canvas> {/* Added ref */}
+                                {prices.length === 0 ? 'No data available for this drug name' : <canvas id="myChart" ref={chartRef} style={{ width: '100%', maxWidth: '600px' }}></canvas>}
                             </div>
                             <div className="bg-[#F8CF24] text-center flex-grow flex justify-center items-center"> Placeholder </div>
                         </div>

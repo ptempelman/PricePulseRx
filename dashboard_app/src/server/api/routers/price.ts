@@ -17,8 +17,11 @@ export const priceRouter = createTRPCRouter({
         }),
 
     getPricesForDrug: publicProcedure
-        .input(z.object({ drugName: z.string().min(1) }))
+        .input(z.object({ drugName: z.string() }))
         .query(async ({ ctx, input }) => {
+            if (input.drugName === '') {
+                return [];
+            }
             return ctx.db.price.findMany({
                 where: { drugName: input.drugName },
                 orderBy: { createdAt: 'asc' }

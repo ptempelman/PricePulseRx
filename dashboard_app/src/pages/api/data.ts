@@ -24,7 +24,7 @@ export default async function handler(
 
     // Save to database
     for (const drug of drugs) {
-        db.price.create({
+        const price = await db.price.create({
             data: {
                 drugName: drug.drugName,
                 price: parseFloat(drug.price),
