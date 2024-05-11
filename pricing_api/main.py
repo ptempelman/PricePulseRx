@@ -39,17 +39,14 @@ async def collect_and_send():
         data = [
             {
                 "drugName": "Atorvastatin",
-                "datetime": "2024-05-11T00:00:00Z",
                 "price": "10.00",
             },
             {
                 "drugName": "Levothyroxine",
-                "datetime": "2024-05-11T00:00:00Z",
                 "price": "8.50",
             },
             {
                 "drugName": "Lisinopril",
-                "datetime": "2024-05-11T00:00:00Z",
                 "price": "12.00",
             },
         ]

@@ -11,7 +11,7 @@ export const priceRouter = createTRPCRouter({
                 data: {
                     drugName: input.name,
                     price: input.price,
-                    platform: input.platform
+                    platform: input.platform,
                 }
             });
         }),
