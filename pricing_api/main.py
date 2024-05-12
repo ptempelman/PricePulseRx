@@ -5,6 +5,7 @@ import requests
 import asyncio
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from datetime import datetime
+from drug import *
 
 app = FastAPI()
 scheduler = AsyncIOScheduler()
@@ -36,20 +37,8 @@ async def collect_and_send():
         current_datetime = datetime.utcnow().isoformat() + "Z"
         print(f"Current datetime: {current_datetime}")
 
-        data = [
-            {
-                "drugName": "Atorvastatin",
-                "price": "10.00",
-            },
-            {
-                "drugName": "Levothyroxine",
-                "price": "8.50",
-            },
-            {
-                "drugName": "Lisinopril",
-                "price": "12.00",
-            },
-        ]
+        data = fetch_all_drug_prices()
+
         response = requests.post(url, json=data)
         print(f"Data posted, status: {response.status_code}")
         await asyncio.sleep(10)  # updates every half hour
