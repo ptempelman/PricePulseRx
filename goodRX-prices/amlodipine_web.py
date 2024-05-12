@@ -15,7 +15,7 @@ def fetch_drug_prices(url):
 
     options = Options()
     options.add_argument('--incognito')
-    options.add_argument("--disable-blink-features=AutomationControlled")  
+    options.add_argument("--disable-blink-features=AutomationControlled")
     options.add_argument("--disable-blink-features")  
     options.add_argument("window-size=1280,800")  
     options.add_experimental_option("excludeSwitches", ["enable-automation"])  
@@ -26,7 +26,7 @@ def fetch_drug_prices(url):
     print("-----Starting url successfully-----\n")
     print('Finding the lowest price and highest price......\n')
     name = driver.find_element_by_tag_name('h1').text
-    price = driver.find_element_by_xpath('//*[@id="__next"]/div/div[2]/div[1]/div[5]/div/div[2]/div/div/div/div[2]/div[2]/div/div[2]/div[1]/div[2]/div/div/div/h1').text
+    price = driver.find_element_by_xpath('//*[@id="__next"]/div/div[2]/div[1]/div[5]/div/div[2]/div/div/div/div[2]/div[1]/div/div[2]/div[1]/div/span[2]').text
     print('Get successfully!\n')
     return name,price
     '''

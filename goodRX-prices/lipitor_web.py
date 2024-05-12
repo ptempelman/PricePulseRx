@@ -14,7 +14,7 @@ def fetch_drug_prices(url):
     
 
     options = Options()
-    #options.add_argument('--incognito')
+    options.add_argument('--incognito')
     options.add_argument("--disable-blink-features=AutomationControlled") 
     options.add_argument("--disable-blink-features")  
     options.add_argument("window-size=1280,800")  
