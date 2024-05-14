@@ -1,17 +1,16 @@
 import Chart from 'chart.js/auto';
 import Head from "next/head";
 import { useRouter } from 'next/router';
-import { useEffect, useRef, useState } from 'react'; // Import useRef
+import { useEffect, useRef, useState } from 'react';
 import { api } from "~/utils/api";
-import placeholderData from '../../placeholder_data.json';
+// import placeholderData from '../../placeholder_data.json';
 
 export default function Search() {
 
     const router = useRouter();
     const drugName = router.query.drugPage
-    const [jsonData, setJsonData] = useState(placeholderData);
-
-    const histData = placeholderData.Lisinopril.historicPrices
+    // const [jsonData, setJsonData] = useState(placeholderData);
+    // const histData = placeholderData.Lisinopril.historicPrices
 
     const [prices, setPrices] = useState<number[]>([]);
     const [dates, setDates] = useState<string[]>([]);
@@ -58,13 +57,13 @@ export default function Search() {
                                 title: {
                                     display: true,
                                     text: 'Date',
-                                    color: 'black' // Set x-axis title color to black
+                                    color: 'black'
                                 },
                                 grid: {
-                                    color: 'black' // Set x-axis grid lines color to black
+                                    color: 'black'
                                 },
                                 ticks: {
-                                    color: 'black' // Set x-axis ticks color to black
+                                    color: 'black'
                                 }
                             },
                             y: {
@@ -72,13 +71,13 @@ export default function Search() {
                                 title: {
                                     display: true,
                                     text: 'Price',
-                                    color: 'black' // Set y-axis title color to black
+                                    color: 'black'
                                 },
                                 grid: {
-                                    color: 'black' // Set y-axis grid lines color to black
+                                    color: 'black'
                                 },
                                 ticks: {
-                                    color: 'black' // Set y-axis ticks color to black
+                                    color: 'black'
                                 }
                             }
                         },
@@ -86,7 +85,7 @@ export default function Search() {
                             title: {
                                 display: true,
                                 text: 'Price vs. Date',
-                                color: 'black' // Set chart title color to black
+                                color: 'black'
                             }
                         }
                     }
